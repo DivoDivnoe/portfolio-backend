@@ -1,0 +1,147 @@
+extends ../_template
+
+block variables
+  - 
+    var title = "Мои работы";
+    var slider = [
+      {
+        title: "Сайт школы онлайн образования",
+        img: "img/portfolio-item1.png",
+        skills: ["HTML", "CSS", "Javascript"],
+        link: "#"
+      },
+      {
+        title: "Сайт агентства интернет-решений",
+        img: "img/portfolio-item2.png",
+        skills: ["HTML", "CSS", "Javascript"],
+        link: "#"
+      },
+      {
+        title: "Портал видеоуроков и IT сообщество",
+        img: "img/portfolio-item3.png",
+        skills: ["HTML", "CSS", "Javascript"],
+        link: "#"
+      },
+      {
+        title: "Сайт йога-центра Atmayoga",
+        img: "img/portfolio-item4.png",
+        skills: ["HTML", "CSS", "Javascript"],
+        link: "#"
+      }
+    ];
+
+    var reviews = [
+      {
+        img: {
+          mobile: {
+            normal: "img/kovalchuk-mobile@1x.jpg",
+            retina: "img/kovalchuk-mobile@2x.jpg"
+          },
+          tablet: {
+            normal: "img/kovalchuk-tablet@1x.jpg",
+            retina: "img/kovalchuk-tablet@2x.jpg"
+          }
+        },
+        name: "Ковальчук Дмитрий",
+        profession: "— основатель Loftschool",
+        text: "Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!"
+      },
+      {
+        img: {
+          mobile: {
+            normal: "img/sabantsev-mobile@1x.jpg",
+            retina: "img/sabantsev-mobile@2x.jpg"
+          },
+          tablet: {
+            normal: "img/sabantsev-tablet@1x.jpg",
+            retina: "img/sabantsev-tablet@2x.jpg"
+          }
+        },
+        name: "Сабанцев Владимир",
+        profession: "— преподаватель",
+        text: "Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах!"
+      }
+    ];
+
+    var page = {
+      title: "Мои работы"
+    };
+
+block content
+  include ../common/hero
+  +hero(page)
+  main.page-main
+    section.portfolio
+      include ../common/triangles
+      +triangles("portfolio__triangles")
+      h1.portfolio__title.title Мои работы
+      .portfolio-main
+        .portfolio__slider.slider
+          ul.slider__list
+            each item in slider
+              li.slider__item
+                .slider__picture
+                  img.slider__image(src=`${item.img}`, alt=`${item.title}`)
+                .slider__content
+                  .slider__content-box
+                    h3.slider__title.title.title--small.title--underlined #{item.title}
+                    .slider__skills #{item.skills.join(", ")}
+                    a.slider__link.button(href=`${item.link}`) Посмотреть сайт
+        .portfolio__toggles
+          .portfolio__toggles-item.portfolio__toggles-item--previous
+            ul.portfolio__toggles-list.portfolio__toggles-list--previous
+              each item in slider
+                li.portfolio__toggles-picture
+                  img.portfolio__toggles-image.portfolio__toggles-image--previous(src=`${item.img}`, alt=`${item.title}`)
+            svg.portfolio__toggles-icon(fill="#ffffff", width="43", height="27")
+              use(xlink:href="img/sprite.svg#icon-portf_arrow_down")
+          .portfolio__toggles-item.portfolio__toggles-item--next
+            ul.portfolio__toggles-list.portfolio__toggles-list--next
+              each item in slider
+                li.portfolio__toggles-picture
+                  img.portfolio__toggles-image.portfolio__toggles-image--previous(src=`${item.img}`, alt=`${item.title}`)
+            svg.portfolio__toggles-icon(fill="#ffffff", width="43", height="27")
+              use(xlink:href="img/sprite.svg#icon-portf_arrow_up")
+    section.reviews
+      .container.reviews__wrapper
+        h2.reviews__title.title Что обо мне говорят
+        .reviews__articles
+          each item in reviews
+            article.reviews__item
+              h3.visually-hidden #{item.name}
+              .reviews__picture
+                picture
+                  source(media="(min-width: 768px)" srcset=`${item.img.tablet.normal} 1x, ${item.img.tablet.retina} 2x`)
+                  img.reviews__image(src=`${item.img.mobile.normal}`, srcset=`${item.img.mobile.retina} 2x`, alt=`${item.name}`)
+              p #{item.text}
+              cite
+                b #{item.name}
+                | #{item.profession}
+        .reviews_form-wrapper
+          .reviews__form.contact-form
+            .contact-form__bg
+            h2.contact-form__title.title.title--small.title--underlined Связаться со мной
+            form#review-form(action="#", method="POST")
+              .contact-form__fields
+                .contact-form__field-wrapper
+                  label.visually-hidden(for="name") Имя
+                  input.contact-form__field(type="text", name="name", id="name", placeholder="Ваше имя")
+                  .contact-form__field-error.popup-error Вы не ввели Имя
+                .contact-form__field-wrapper
+                  label.visually-hidden(for="email") Email
+                  input.contact-form__field(type="email", name="email", id="email", placeholder="Ваш email")
+                  .contact-form__field-error.popup-error Вы не ввели email
+                .contact-form__field-wrapper
+                  label.visually-hidden(for="message") Ваше сообщение
+                  textarea.contact-form__message(name="message", id="message", placeholder="Ваше сообщение")
+                  .contact-form__field-error.popup-error Вы не ввели сообщение
+              .contact-form__buttons
+                button.contact-form__button.button(type="submit") Отправить
+                button.contact-form__button.contact-form__button--reset.button(type="reset") Очистить
+        .reviews__arrow-wrapper
+          button.reviews__arrow
+            svg.reviews__arrow-icon(fill="#ffffff", width="26", height="16")
+              use(xlink:href="img/sprite.svg#icon-arrow_down")
+  include ../common/footer
+  +footer('portfolio-footer')
+  include ../common/preloader

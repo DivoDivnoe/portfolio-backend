@@ -1,0 +1,63 @@
+-
+  var pages = [
+    {
+      title: "Мои работы",
+      href: "works"
+    },
+    {
+      title: "Блог",
+      href: "blog"
+    },
+    {
+      title: "Обо мне",
+      href: "about"
+    },
+    {
+      title: "Авторизация",
+      href: "/"
+    }
+  ];
+
+mixin hero(page)
+  section.hero
+    h2.visually-hidden Сайт портфолио Андрея Иванова
+    .container.hero__wrapper
+      header.hero__header.header
+        include ../common/socials
+        +socials("header__socials", 0.7)
+        nav.main-nav
+          button.main-nav__toggle.toggle
+            span.visually-hidden Главное меню
+            span.toggle-line
+          .main-nav__menu
+            .main-nav__menu-left
+            .main-nav__menu-right
+            .container.main-nav__wrapper
+              ul.main-nav__list
+                each item in pages
+                  li.main-nav__item
+                    if item.title === page.title
+                      a.main-nav__link.title.main-nav__link--active #{item.title}
+                    else
+                      a.main-nav__link.title(href=`${item.href}`) #{item.title}
+      .hero__bg
+      .hero__box-wrapper
+        .hero__box
+          .hero__stars
+            img.hero__stars-image(src="img/svg/stars1.svg", alt="stars", width="281", height="167")
+          .hero__picture
+            picture
+              source(media="(min-width: 768px)", srcset="img/me-tablet@1x.jpg 1x, img/me-tablet@2x.jpg 2x")
+              img.hero__image(src="img/me-mobile@1x.jpg", srcset="img/me-mobile@2x.jpg 2x", alt="Андрей Иванов", width="250", height="256")
+          .hero__title
+            if page.title === "Блог"
+              .hero__name.title #{page.title}
+              span.hero__description #{page.text}
+            else 
+              .hero__title-name Андрей Иванов
+              span.hero__title-description Личный сайт веб разработчика
+      if page !== "Блог"
+        .hero__arrow-wrapper
+          button.hero__arrow
+            svg.hero__arrow-icon(fill="#ffffff", width="26", height="16")
+              use(xlink:href="img/sprite.svg#icon-arrow_down")
