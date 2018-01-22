@@ -2,7 +2,6 @@ extends ../_template
 
 block variables
   - 
-    var title = "Мои работы";
     var slider = [
       {
         title: "Сайт школы онлайн образования",
@@ -121,7 +120,9 @@ block content
           .reviews__form.contact-form
             .contact-form__bg
             h2.contact-form__title.title.title--small.title--underlined Связаться со мной
-            form#review-form(action="#", method="POST")
+            if (msg) 
+              .status #{msg}
+            form#review-form(action="/works/contact", method="POST", enctype="application/x-www-form-urlencoded")
               .contact-form__fields
                 .contact-form__field-wrapper
                   label.visually-hidden(for="name") Имя
