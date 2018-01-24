@@ -4,8 +4,9 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+require('./api/models/db'); //Подключаем БД
 var index = require('./routes/index');
+var indexApi = require('./api/routes/index');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/', index);
+app.use('/api', indexApi);
 app.use('/admin', function(req, res) {
   res.sendFile(path.join(__dirname, './build', 'admin.html'));
 });

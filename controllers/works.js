@@ -1,15 +1,26 @@
 const nodemailer = require('nodemailer');
+const http = require('request');
 const config = require('../config/config.json');
 
+const apiOptions = {
+  server: 'http://localhost:3000'
+};
+
 module.exports.getWorksPage = (req, res, next) => {
-  res.render('pages/works', {
-    title: 'Мои работы',
-    msg: req.query.msg
+  const pathAPI = '/api/works';
+  const requestOptions = {
+    url: apiOptions.server + pathAPI,
+    method: 'GET'
+  };
+  const sendObj = {
+    title: 'My Works'
+  };
+  http(requestOptions, (error, response, body) => {
+    res.render('pages/works', Object.assign(sendObj, JSON.parse(body)));
   });
 };
 
 module.exports.sendEmail = (req, res) => {
-  console.log('test');
   if (!req.body.name || !req.body.email || !req.body.message) {
     return res.redirect('/works?msg=Все поля нужно заполнить!');
   }
@@ -24,6 +35,7 @@ module.exports.sendEmail = (req, res) => {
       `\n Отправлено с: ${req.body.email}`
   };
   transporter.sendMail(mailOptions, (error, info) => {
+    console.log('OK');
     if (error) {
       return res.redirect('/works?msg=Произошла ошибка при отправке письма');
     }

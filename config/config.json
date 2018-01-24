@@ -1,4 +1,11 @@
 {
+  "db": {
+    "host": "localhost",
+    "port": "27017",
+    "name": "testadw",
+    "user": "",
+    "password": ""
+  },
   "mail": {
     "subject": "Сообщение с сайта-портфолио",
     "smtp": {
@@ -6,8 +13,8 @@
       "port": "465",
       "secure": "true",
       "auth": {
-          "user": "divodivnoe1985@gmail.com",
-          "pass": "3000yf[kt,ybrjd"
+        "user": "divodivnoe1985@gmail.com",
+        "pass": "3000yf[kt,ybrjd"
       }
     }
   }

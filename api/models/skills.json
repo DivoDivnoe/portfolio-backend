@@ -1,0 +1,47 @@
+[
+  {
+    "name": "HTML5",
+    "perc": "90",
+    "type": "frontend"
+  },
+  {
+    "name": "CSS3",
+    "perc": "90",
+    "type": "frontend"
+  },
+  {
+    "name": "Javascript",
+    "perc": "80",
+    "type": "frontend"
+  },
+  {
+    "name": "SASS",
+    "perc": "70",
+    "type": "frontend"
+  },
+  {
+    "name": "PUG",
+    "perc": "70",
+    "type": "frontend"
+  },
+  {
+    "name": "Node.js",
+    "perc": "40",
+    "type": "backend"
+  },
+  {
+    "name": "Mongo.db",
+    "perc": "40",
+    "type": "backend"
+  },
+  {
+    "name": "Git",
+    "perc": "70",
+    "type": "workflow"
+  },
+  {
+    "name": "Gulp",
+    "perc": "70",
+    "type": "workflow"
+  }
+]

@@ -10,7 +10,7 @@ const ctrlAbout = require('../controllers/about');
 router.get('/', ctrlHome.getIndex);
 router.get('/auth', ctrlAuth.getAuthPage);
 router.get('/works', ctrlWorks.getWorksPage);
-router.post('/works/contact', ctrlWorks.sendEmail);
+router.post('/works', ctrlWorks.sendEmail);
 router.get('/blog', ctrlBlog.getBlogPage);
 router.get('/about', ctrlAbout.getAboutPage);
 

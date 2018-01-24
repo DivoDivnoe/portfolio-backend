@@ -2,33 +2,6 @@ extends ../_template
 
 block variables
   - 
-    var slider = [
-      {
-        title: "Сайт школы онлайн образования",
-        img: "img/portfolio-item1.png",
-        skills: ["HTML", "CSS", "Javascript"],
-        link: "#"
-      },
-      {
-        title: "Сайт агентства интернет-решений",
-        img: "img/portfolio-item2.png",
-        skills: ["HTML", "CSS", "Javascript"],
-        link: "#"
-      },
-      {
-        title: "Портал видеоуроков и IT сообщество",
-        img: "img/portfolio-item3.png",
-        skills: ["HTML", "CSS", "Javascript"],
-        link: "#"
-      },
-      {
-        title: "Сайт йога-центра Atmayoga",
-        img: "img/portfolio-item4.png",
-        skills: ["HTML", "CSS", "Javascript"],
-        link: "#"
-      }
-    ];
-
     var reviews = [
       {
         img: {
@@ -77,26 +50,26 @@ block content
       .portfolio-main
         .portfolio__slider.slider
           ul.slider__list
-            each item in slider
+            each item in works
               li.slider__item
                 .slider__picture
                   img.slider__image(src=`${item.img}`, alt=`${item.title}`)
                 .slider__content
                   .slider__content-box
                     h3.slider__title.title.title--small.title--underlined #{item.title}
-                    .slider__skills #{item.skills.join(", ")}
+                    .slider__skills #{item.skills}
                     a.slider__link.button(href=`${item.link}`) Посмотреть сайт
         .portfolio__toggles
           .portfolio__toggles-item.portfolio__toggles-item--previous
             ul.portfolio__toggles-list.portfolio__toggles-list--previous
-              each item in slider
+              each item in works
                 li.portfolio__toggles-picture
                   img.portfolio__toggles-image.portfolio__toggles-image--previous(src=`${item.img}`, alt=`${item.title}`)
             svg.portfolio__toggles-icon(fill="#ffffff", width="43", height="27")
               use(xlink:href="img/sprite.svg#icon-portf_arrow_down")
           .portfolio__toggles-item.portfolio__toggles-item--next
             ul.portfolio__toggles-list.portfolio__toggles-list--next
-              each item in slider
+              each item in works
                 li.portfolio__toggles-picture
                   img.portfolio__toggles-image.portfolio__toggles-image--previous(src=`${item.img}`, alt=`${item.title}`)
             svg.portfolio__toggles-icon(fill="#ffffff", width="43", height="27")
@@ -122,7 +95,7 @@ block content
             h2.contact-form__title.title.title--small.title--underlined Связаться со мной
             if (msg) 
               .status #{msg}
-            form#review-form(action="/works/contact", method="POST", enctype="application/x-www-form-urlencoded")
+            form#review-form(action="/works", method="POST", enctype="application/x-www-form-urlencoded")
               .contact-form__fields
                 .contact-form__field-wrapper
                   label.visually-hidden(for="name") Имя
