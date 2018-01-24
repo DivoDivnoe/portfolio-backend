@@ -1,7 +1,6 @@
 extends ../_template
 
 block variables
-  include ../common/variables
   - 
     var contacts = [
       {
@@ -28,6 +27,13 @@ block variables
     var page = {
       title: "Обо мне"
     };
+    var skillTypes = skills.reduce(function(acc, skill) {
+      if (!acc.includes(skill.type)) {
+        acc.push(skill.type);
+      }
+
+      return acc;
+    }, []);
 
 block content
   include ../common/hero
@@ -60,16 +66,17 @@ block content
                 |по порядку.
           div.about-item__skills.skills
             .about__wrapper.about__wrapper--skills
-              each skillArea in skillAreas
+              each skillType in skillTypes
                 div.skills__item
-                  h3.skills__title #{skillArea.title}
+                  h3.skills__title #{skillType}
                   ul.skills__list
-                    each skill in skillArea.skills
-                      li.skills__list-item.skill
-                        span.skill__title #{skill.name}
-                        svg.skill__circle.circles(viewBox="0 0 110 110", width="110", height="110")
-                          circle.circle__first.circle(r="45", cx="50%", cy="50%", fill="none")
-                          circle(class=`circle__second circle circle-${skill.perc}`, r="45", cx="50%", cy="50%")
+                    each skill in skills
+                      if (skill.type === skillType)
+                        li.skills__list-item.skill
+                          span.skill__title #{skill.name}
+                          svg.skill__circle.circles(viewBox="0 0 110 110", width="110", height="110")
+                            circle.circle__first.circle(r="45", cx="50%", cy="50%", fill="none")
+                            circle(class=`circle__second circle circle-${skill.perc}`, r="45", cx="50%", cy="50%")
     section.contacts
       .contacts__box
         .contacts__box-wrapper
