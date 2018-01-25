@@ -2,18 +2,19 @@ extends ../_template
 
 block variables
   - 
+    var title = "Сайт портфолио";
     var welcomeMenu = [
       {
         title: "Мои работы",
-        link: "works"
+        link: "works",
       },
       {
         title: "Обо мне",
-        link: "about"
+        link: "about",
       },
       {
         title: "Блог",
-        link: "blog"
+        link: "blog",
       }
     ];
 
@@ -31,7 +32,7 @@ block content
         img.parallax__image(src="img/forest@1x.png", alt="forest", width="1200", height="263")
     .container.welcome__wrapper
       header.welcome-header
-        a.welcome-header__auth(href="auth") Авторизоваться
+        a.welcome-header__auth(href="auth.html") Авторизоваться
       .welcome__user-wrapper
         .welcome__user-box
           .welcome__user.user
@@ -49,7 +50,8 @@ block content
                     a(class=`welcome-nav__link welcome-nav__link--${item.link} button`, href=item.link) #{item.title}
           .welcome__form.form
             h2.form__title Авторизуйтесь
-            form#form(action="#")
+            form#form(action="/")
+              .form__status Неверный логин или пароль
               .form__field-wrapper
                 input.form__field(type="text", id="login", name="login", placeholder="Логин")
                 label.form__field-picture(for="login")
