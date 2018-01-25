@@ -96,6 +96,7 @@ block content
             if (msg) 
               .status #{msg}
             form#review-form(action="/works", method="POST", enctype="application/x-www-form-urlencoded")
+              .contact-form__status Ошибка при отправке сообщения
               .contact-form__fields
                 .contact-form__field-wrapper
                   label.visually-hidden(for="name") Имя

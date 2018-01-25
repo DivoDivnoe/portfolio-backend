@@ -37,3 +37,4 @@ process.on('SIGINT', () => {
 require('./blog');
 require('./skill');
 require('./work');
+require('./user');

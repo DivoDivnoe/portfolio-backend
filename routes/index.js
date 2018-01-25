@@ -8,6 +8,7 @@ const ctrlAbout = require('../controllers/about');
 
 /* GET home page. */
 router.get('/', ctrlHome.getIndex);
+router.post('/', ctrlHome.auth);
 router.get('/auth', ctrlAuth.getAuthPage);
 router.get('/works', ctrlWorks.getWorksPage);
 router.post('/works', ctrlWorks.sendEmail);

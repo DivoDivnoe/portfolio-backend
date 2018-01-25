@@ -5,6 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('./api/models/db'); //Подключаем БД
+
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
 var index = require('./routes/index');
 var indexApi = require('./api/routes/index');
 
@@ -20,11 +25,28 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
+app.use(
+  session({
+    secret: 'loftschool',
+    cookie: {
+      path: '/',
+      httpOnly: true,
+      maxAge: null
+    },
+    saveUninitialized: false,
+    resave: false,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+  })
+);
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/', index);
 app.use('/api', indexApi);
 app.use('/admin', function(req, res) {
+  if (!req.session.isAdmin) {
+    return res.status(404).send();
+  }
   res.sendFile(path.join(__dirname, './build', 'admin.html'));
 });
 
