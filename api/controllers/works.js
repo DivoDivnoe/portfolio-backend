@@ -28,10 +28,7 @@ const uploadWork = (req, res, success) => {
         fs.unlink(fileName);
         fs.rename(files.image.path, fileName);
       } else {
-        const dir = fileName
-          .split('\\')
-          .slice(1)
-          .join('/');
+        const dir = fileName.substr(fileName.indexOf('\\'));
         success(fields, dir);
       }
     });
