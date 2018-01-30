@@ -14,7 +14,7 @@ const uploadWork = (req, res, success) => {
 
   form.uploadDir = upload;
 
-  form.parse(req, function (err, fields, files) {
+  form.parse(req, function(err, fields, files) {
     if (err) {
       res.status(400).json({
         msg: 'Не удалось загрузить картинку'
@@ -23,12 +23,15 @@ const uploadWork = (req, res, success) => {
 
     fileName = path.join(upload, files.image.name);
 
-    fs.rename(files.image.path, fileName, function (err) {
+    fs.rename(files.image.path, fileName, function(err) {
       if (err) {
         fs.unlink(fileName);
         fs.rename(files.image.path, fileName);
       } else {
-        const dir = fileName.substr(fileName.indexOf('\\'));
+        const dir = fileName
+          .split('\\')
+          .slice(1)
+          .join('/');
         success(fields, dir);
       }
     });
@@ -48,7 +51,7 @@ module.exports.getWorks = (req, res) => {
 module.exports.createWork = (req, res) => {
   const Model = mongoose.model('work');
 
-  uploadWork(req, res, function (fields, image) {
+  uploadWork(req, res, function(fields, image) {
     const item = new Model({
       title: fields.name,
       skills: fields.tehnologies,
