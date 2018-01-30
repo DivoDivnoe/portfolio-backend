@@ -13,6 +13,7 @@ const getDateTime = date => {
 };
 
 module.exports.getBlogPage = (req, res, next) => {
+  console.log(apiOptions.server);
   const pathAPI = '/api/blog';
   const requestOptions = {
     url: apiOptions.server + pathAPI,
