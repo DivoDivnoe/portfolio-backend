@@ -3,7 +3,7 @@ const http = require('request');
 const config = require('../config/config.json');
 
 const apiOptions = {
-  server: 'http://92.53.105.12'
+  server: 'http://92.53.105.12:3000'
 };
 
 module.exports.getWorksPage = (req, res, next) => {

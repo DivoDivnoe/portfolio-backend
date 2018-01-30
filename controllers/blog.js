@@ -1,7 +1,7 @@
 const http = require('request');
 
 const apiOptions = {
-  server: 'http://92.53.105.12'
+  server: 'http://92.53.105.12:3000'
 };
 
 const getDateTime = date => {
@@ -13,7 +13,6 @@ const getDateTime = date => {
 };
 
 module.exports.getBlogPage = (req, res, next) => {
-  console.log(apiOptions.server);
   const pathAPI = '/api/blog';
   const requestOptions = {
     url: apiOptions.server + pathAPI,
@@ -23,6 +22,7 @@ module.exports.getBlogPage = (req, res, next) => {
     title: 'My Blog'
   };
   http(requestOptions, (error, response, body) => {
+    console.log(body);
     body = JSON.parse(body);
 
     body.articles.forEach(article => {

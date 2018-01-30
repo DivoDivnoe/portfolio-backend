@@ -1,7 +1,7 @@
 const http = require('request');
 
 const apiOptions = {
-  server: 'http://92.53.105.12'
+  server: 'http://92.53.105.12:3000'
 };
 
 module.exports.getAboutPage = (req, res, next) => {
