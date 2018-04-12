@@ -19,5 +19,9 @@
     "pug": "2.0.0-beta11",
     "request": "^2.83.0",
     "serve-favicon": "~2.4.5"
+  },
+  "engines": {
+    "node": "8.9.1",
+    "npm": "5.8.0"
   }
 }
