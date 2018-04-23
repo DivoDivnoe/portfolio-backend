@@ -1,7 +1,7 @@
 const http = require('request');
 
 const apiOptions = {
-  server: 'http://localhost:3000'
+  server: 'https://stark-meadow-92314.herokuapp.com'
 };
 
 module.exports.getAboutPage = (req, res, next) => {
